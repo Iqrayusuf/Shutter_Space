@@ -62,3 +62,4 @@ public class PhotographyController {
         return ResponseEntity.ok("Photography delete successfully!");
     }
 }
+// raagul
