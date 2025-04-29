@@ -1,0 +1,57 @@
+.challenge-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* responsive columns */
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .challenge-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+  }
+  
+  .challenge-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .challenge-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .challenge-details {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .description {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .like-btn {
+    padding: 8px 12px;
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    align-self: flex-start;
+  }
+  
+  .like-btn:hover {
+    background-color: #e63956;
+  }
+  
