@@ -5,7 +5,7 @@
     align-items: center;
     min-height: 100vh;
     background-color: #f4f7fc;
-    background-image: url('../assets/jamie-street-qWYvQMIJyfE-unsplash.jpg'); /* Add the image path here */
+    /*background-image: url('../assets/jamie-street-qWYvQMIJyfE-unsplash.jpg'); /* Add the image path here */
     background-size: cover; /* This ensures the image covers the whole container */
     background-position: center center; /* Centers the background image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
