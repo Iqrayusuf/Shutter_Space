@@ -4,8 +4,8 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f4f7fc;
-    /*background-image: url('../assets/jamie-street-qWYvQMIJyfE-unsplash.jpg'); /* Add the image path here */
+    background-color:#ececec; /*update color *?
+    background-image: url('../assets/jamie-street-qWYvQMIJyfE-unsplash.jpg'); /* Add the image path here */
     background-size: cover; /* This ensures the image covers the whole container */
     background-position: center center; /* Centers the background image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -101,4 +101,12 @@ button:hover {
     button {
         font-size: 14px;
     }
+}
+
+.inputbox label {
+    font-size: 1rem; /* Adjust the font size */
+    font-weight: bold; /* Make the label text bold */
+    color: #333; /* Set the text color */
+    margin-bottom: 5px; /* Add spacing below the label */
+    display: block; /* Ensure the label is displayed on its own line */
 }
