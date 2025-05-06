@@ -12,65 +12,62 @@ const ListPhotographyComponent = () => {
         getAllPhotography();
     }, []);
 
-    function getAllPhotography() {
-        listPhotography().then((response) => {
-            const currentDate = new Date();
-            const filteredData = response.data.filter(item => new Date(item.endDate) >= currentDate);
-            setPhotography(filteredData);
-        }).catch(error => {
-            console.error(error);
-        });
-    }
+    const getAllPhotography = () => {
+        listPhotography().then(response => {
+            const now = new Date();
+            const active = response.data.filter(item => new Date(item.endDate) >= now);
+            setPhotography(active);
+        }).catch(console.error);
+    };
 
-    function addNewChallenge() {
-        navigate('/add-challenge/photography');
-    }
-
-    function updatePhotography(id) {
-        navigate(`/edit-photography/${id}`);
-    }
-
-    function removePhotography(id) {
-        deletePhotography(id).then(() => {
-            getAllPhotography();
-        }).catch(error => {
-            console.error(error);
-        });
-    }
+    const addNewChallenge = () => navigate('/add-challenge/photography');
+    const updatePhotography = (id) => navigate(`/edit-photography/${id}`);
+    const removePhotography = (id) => {
+        deletePhotography(id).then(getAllPhotography).catch(console.error);
+    };
 
     return (
-        <div className="list-container">
-            <h2>Current Photography Challenges</h2>
-            <button className="add-btn" onClick={addNewChallenge}>Add Challenge</button>
+        <div className="dashboard">
+            <div className="feed">
+                <div className="feed-header">
+                    <h2 className="app-title">Photography Challenges</h2>
+                    <p className="app-tagline">Explore and manage current challenges</p>
+                </div>
 
-            <div className="challenge-list">
-                {photography.length > 0 ? (
-                    photography.map(item => (
-                        <div className="challenge-card" key={item.id}>
-                            <h3>{item.challengeName}</h3>
-                            <p><strong>Description:</strong> {item.challengeDescription}</p>
-                            <p><strong>Rules:</strong> {item.challengeRules}</p>
-                            <p><strong>End Date:</strong> {item.endDate}</p>
-                            <p><strong>Time Remaining:</strong>
-                                <span className="countdown">
-                                    <CountdownTimer 
-                                        endDate={item.endDate} 
-                                        onTimerEnd={() => removePhotography(item.id)} 
-                                    />
-                                </span>
-                            </p>
-                            <div className="challenge-actions">
-                                <button onClick={() => updatePhotography(item.id)}>Update</button>
-                                <button onClick={() => removePhotography(item.id)}>Delete</button>
+                <button className="feature-btn challenge-btn" onClick={addNewChallenge}>
+                    + Add New Challenge
+                </button>
+
+                <div className="challenge-list">
+                    {photography.length > 0 ? (
+                        photography.map(item => (
+                            <div className="challenge-card-dark" key={item.id}>
+                                <h3>{item.challengeName}</h3>
+                                <p><strong>Description:</strong> {item.challengeDescription}</p>
+                                <p><strong>Rules:</strong> {item.challengeRules}</p>
+                                <p><strong>End Date:</strong> {item.endDate}</p>
+                                <p><strong>Time Remaining:</strong>{' '}
+                                    <span className="countdown">
+                                        <CountdownTimer 
+                                            endDate={item.endDate}
+                                            onTimerEnd={() => removePhotography(item.id)}
+                                        />
+                                    </span>
+                                </p>
+                                <div className="challenge-actions-dark">
+                                    <button onClick={() => updatePhotography(item.id)} className="update-btn">Update</button>
+                                    <button onClick={() => removePhotography(item.id)} className="delete-btn">Delete</button>
+                                </div>
                             </div>
-                        </div>
-                    ))
-                ) : (
-                    <p>No current photography challenges available.</p>
-                )}
+                        ))
+                    ) : (
+                        <p className="no-challenges">No current photography challenges available.</p>
+                    )}
+                </div>
             </div>
         </div>
     );
 };
 
 export default ListPhotographyComponent;
+

@@ -1,105 +1,158 @@
-.list-container {
-    padding: 20px;
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Layout */
+.dashboard {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    min-height: 100vh;
 }
 
-h2 {
-    margin-bottom: 20px;
+.feed {
+    width: 100%;
+    padding: 24px;
+}
+
+/* Header */
+.feed-header {
     text-align: center;
-    font-size: 2rem;
-    color: #333;
+    margin-bottom: 24px;
 }
 
-.add-btn {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
+.app-title {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #3a7bd5, #5e35b1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.app-tagline {
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* Add Button */
+.feature-btn {
+    display: block;
+    margin: 0 auto 24px;
+    padding: 12px 24px;
     border: none;
+    border-radius: 8px;
+    font-size: 14px;
     cursor: pointer;
-    margin-bottom: 20px;
-    align-self: center;
-    font-size: 1rem;
-    border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
-.add-btn:hover {
-    background-color: #45a049;
+.challenge-btn {
+    background-color: #5e35b1;
+    color: white;
 }
 
+.challenge-btn:hover {
+    background-color: #4d2c91;
+}
+
+/* Challenge Cards */
 .challenge-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
 
-.challenge-card {
-    background-color: #ffffff;
+.challenge-card-dark {
+    background-color: #222;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     gap: 12px;
     transition: transform 0.2s ease;
 }
 
-.challenge-card:hover {
+.challenge-card-dark:hover {
     transform: translateY(-4px);
 }
 
-.challenge-card h3 {
-    margin-top: 0;
-    color: #333;
-}
-
-.challenge-card p {
+.challenge-card-dark h3 {
     margin: 0;
-    color: #555;
-    line-height: 1.4;
-    font-size: 0.95rem;
+    color: #fff;
 }
 
-.challenge-card p strong {
-    color: #222;
+.challenge-card-dark p {
+    margin: 0;
+    color: #ccc;
+    font-size: 14px;
 }
 
-.challenge-actions {
+.challenge-card-dark p strong {
+    color: #fff;
+}
+
+/* Countdown */
+.countdown {
+    color: #e91e63;
+    font-weight: bold;
+}
+
+/* Actions */
+.challenge-actions-dark {
     display: flex;
+    justify-content: flex-end;
     gap: 10px;
     margin-top: auto;
 }
 
-.challenge-actions button {
+.update-btn,
+.delete-btn {
     padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
     border: none;
-    cursor: pointer;
     border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 0.9rem;
 }
 
-.challenge-actions button:hover {
-    background-color: #0056b3;
+.update-btn {
+    background-color: #3a7bd5;
+    color: #fff;
 }
 
-.challenge-actions button:last-child {
+.update-btn:hover {
+    background-color: #2e6ac0;
+}
+
+.delete-btn {
     background-color: #dc3545;
+    color: #fff;
 }
 
-.challenge-actions button:last-child:hover {
+.delete-btn:hover {
     background-color: #c82333;
 }
 
-/* Countdown Timer Style */
-.countdown {
-    font-weight: bold;
-    color: #e91e63;
-    font-size: 1rem;
+/* Empty Message */
+.no-challenges {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 16px;
+    color: #888;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .challenge-list {
+        grid-template-columns: 1fr;
+    }
 }
