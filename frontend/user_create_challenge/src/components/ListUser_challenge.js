@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ListUser_challenge as fetchUserChallenges } from '../Services/ListUser_challengeServices';
-import './ListUser_challenge.css'; // 👈 Add your styles here
+import './ListUser_challenge.css'; // Add the dark-themed CSS
 
 const ListUser_challenge = () => {
   const [userChallenges, setUserChallenges] = useState([]);
