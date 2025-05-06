@@ -1,8 +1,9 @@
+/* UserChallenge.css */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
+  /*background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;*/
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -11,91 +12,123 @@ body {
   flex-direction: column;
 }
 
-  .challenge-form {
-    width: 100%;
-    max-width: 500px;
-    margin: 30px auto;
-    padding: 25px 30px;
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    animation: fadeIn 0.6s ease-in-out;
+.user-challenge-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 25px;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.challenge-form {
+  background-color: #1e1e1e; /* Dark background for form */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.challenge-form h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #bbb;
+}
+
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #333;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+textarea:focus,
+input[type="file"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+.form-preview {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.form-preview img {
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+.preview-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 1em;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin: 10px 5px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+.view-challenges-btn {
+  padding: 12px 25px;
+  font-size: 1em;
+  background: #5e35b1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 20px;
+}
+
+.view-challenges-btn:hover {
+  background: #4d2c91;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
   }
-  
-  .challenge-form h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 25px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #444;
-  }
-  
-  textarea,
-  input[type="file"] {
-    width: 100%;
-    padding: 12px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
-  }
-  
-  textarea:focus,
-  input[type="file"]:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
-  }
-  
-  .form-preview {
-    text-align: center;
-    margin-top: 15px;
-  }
-  
-  .form-preview img {
-    border-radius: 10px;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .form-actions {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  button {
-    padding: 12px 25px;
-    font-size: 1em;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin: 10px 5px;
-  }
-  
-  button:hover {
-    background: #0056b3;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+}
