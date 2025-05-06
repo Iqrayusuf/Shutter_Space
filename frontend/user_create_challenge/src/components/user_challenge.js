@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import './user_challenge.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import './user_challenge.css'; // Updated CSS
+import { useNavigate } from 'react-router-dom';
 
 const UserChallenge = () => {
   const [description, setDescription] = useState('');
   const [photo, setPhoto] = useState(null);
   const [preview, setPreview] = useState(null);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); // useNavigate hook
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
@@ -44,8 +44,7 @@ const UserChallenge = () => {
         setDescription('');
         setPhoto(null);
         setPreview(null);
-        console.log("Redirecting to /challenge-list...");
-        navigate('/challenge'); // Redirect to the dashboard (Home page) after submission
+        navigate('/challenge'); // Redirect to challenges list
       } else {
         alert('Failed to submit challenge.');
       }
@@ -54,13 +53,8 @@ const UserChallenge = () => {
     }
   };
 
-  // Handle showing the list of challenges
-  const handleShowChallenges = () => {
-    navigate('/challenge-list');
-  };
-
   return (
-    <div>
+    <div className="user-challenge-container">
       <form className="challenge-form" onSubmit={handleSubmit}>
         <h2>Submit a Challenge</h2>
 
@@ -88,17 +82,16 @@ const UserChallenge = () => {
         {preview && (
           <div className="form-preview">
             <p>Preview:</p>
-            <img src={preview} alt="Preview" style={{ width: '200px' }} />
+            <img src={preview} alt="Preview" className="preview-img" />
           </div>
         )}
 
         <div className="form-actions">
-          <button type="submit">Submit Challenge</button>
+          <button type="submit" className="submit-btn">Submit Challenge</button>
         </div>
       </form>
 
-      {/* Show Challenge Button */}
-      <button onClick={handleShowChallenges}>Show Challenges</button>
+      <button onClick={() => navigate('/challenge-list')} className="view-challenges-btn">Show Challenges</button>
     </div>
   );
 };
