@@ -1,36 +1,36 @@
-/* General Wrapper */
+/* Dark Themed Wrapper */
 .wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color:#ececec; /*update color *?
-    background-image: url('../assets/jamie-street-qWYvQMIJyfE-unsplash.jpg'); /* Add the image path here */
-    background-size: cover; /* This ensures the image covers the whole container */
-    background-position: center center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-color: #000;
     padding: 20px;
 }
 
-/* Form Container */
+/* Dark Form Container */
 form {
-    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency to make the form blend with the background */
+    background-color: #111;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(58, 123, 213, 0.2);
     width: 100%;
     max-width: 600px;
+    color: #fff;
 }
 
-/* Form Title */
+/* Title */
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     font-size: 24px;
-    color: #333;
+    background: linear-gradient(90deg, #3a7bd5, #5e35b1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
-/* Input Box Styling */
+/* Input Container */
 .inputbox {
     margin-bottom: 20px;
     display: flex;
@@ -39,31 +39,33 @@ h1 {
 
 .inputbox input {
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #444;
     border-radius: 8px;
     font-size: 16px;
-    color: #333;
+    background-color: #222;
+    color: #fff;
     outline: none;
     transition: border-color 0.3s ease;
 }
 
 .inputbox input:focus {
-    border-color: #007bff;
+    border-color: #3a7bd5;
 }
 
+/* Error Text */
 .inputbox small {
     margin-top: 5px;
-    color: red;
+    color: #ff6b6b;
     font-size: 12px;
 }
 
-/* Submit Button */
+/* Button Styling */
 button {
     padding: 12px 20px;
-    background-color: #007bff;
+    background-color: #3a7bd5;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 999px;
     font-size: 16px;
     cursor: pointer;
     width: 100%;
@@ -71,16 +73,10 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #2e6ac0;
 }
 
-/* Error Message */
-.error {
-    color: red;
-    font-size: 14px;
-}
-
-/* Mobile Responsiveness */
+/* Responsive */
 @media (max-width: 768px) {
     .wrapper {
         padding: 10px;
@@ -94,19 +90,8 @@ button:hover {
         font-size: 20px;
     }
 
-    .inputbox input {
-        font-size: 14px;
-    }
-
+    .inputbox input,
     button {
         font-size: 14px;
     }
-}
-
-.inputbox label {
-    font-size: 1rem; /* Adjust the font size */
-    font-weight: bold; /* Make the label text bold */
-    color: #333; /* Set the text color */
-    margin-bottom: 5px; /* Add spacing below the label */
-    display: block; /* Ensure the label is displayed on its own line */
 }
