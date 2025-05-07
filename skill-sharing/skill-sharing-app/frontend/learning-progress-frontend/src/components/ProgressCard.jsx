@@ -65,12 +65,13 @@ export default function ProgressCard({ progress, onDelete, onTagClick }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             style={{
-                border: "1px solid #ccc",
+                border: "1px solid #444",
                 padding: "15px",
                 margin: "15px 0",
                 borderRadius: "10px",
-                background: "#f9f9f9",
-                boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
+                background: "#333",
+                color: "#fff",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)"
             }}
         >
             {isEditing ? (
@@ -135,10 +136,25 @@ export default function ProgressCard({ progress, onDelete, onTagClick }) {
                             <img src={`http://localhost:8080/uploads/${progress.screenshot}`} alt="Screenshot" style={{ maxWidth: "100%" }} />
                         </div>
                     )}
-                    <button onClick={() => setIsEditing(true)} style={{ marginRight: "10px", padding: "8px 15px", backgroundColor: "#007BFF", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>✏️ Edit</button>
-                    <button onClick={handleDelete} style={{ padding: "8px 15px", backgroundColor: "#f44336", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>🗑 Delete</button>
+                    <button
+                        onClick={() => setIsEditing(true)}
+                        style={{
+                            marginRight: "10px",
+                            padding: "8px 15px",
+                            backgroundColor: "#3a7bd5",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                            transition: "background-color 0.3s ease"
+                        }}
+                    >
+                        ✏️ Edit
+                    </button>
+                    <button onClick={handleDelete} style={{ padding: "8px 15px", backgroundColor: "#f44336", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", transition: "background-color 0.3s ease" }}>🗑 Delete</button>
                 </>
             )}
         </motion.div>
     );
 }
+
