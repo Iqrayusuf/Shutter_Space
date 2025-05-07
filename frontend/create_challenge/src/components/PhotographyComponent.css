@@ -1,0 +1,112 @@
+/* General Wrapper */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color:#ececec; /*update color *?
+    background-image: url('../assets/jamie-street-qWYvQMIJyfE-unsplash.jpg'); /* Add the image path here */
+    background-size: cover; /* This ensures the image covers the whole container */
+    background-position: center center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    padding: 20px;
+}
+
+/* Form Container */
+form {
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency to make the form blend with the background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Form Title */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Input Box Styling */
+.inputbox {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputbox input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.inputbox input:focus {
+    border-color: #007bff;
+}
+
+.inputbox small {
+    margin-top: 5px;
+    color: red;
+    font-size: 12px;
+}
+
+/* Submit Button */
+button {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Error Message */
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 10px;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .inputbox input {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+
+.inputbox label {
+    font-size: 1rem; /* Adjust the font size */
+    font-weight: bold; /* Make the label text bold */
+    color: #333; /* Set the text color */
+    margin-bottom: 5px; /* Add spacing below the label */
+    display: block; /* Ensure the label is displayed on its own line */
+}
