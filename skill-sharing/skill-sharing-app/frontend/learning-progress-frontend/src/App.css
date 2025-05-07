@@ -1,3 +1,9 @@
+body {
+  background-color: #1c1c1c; /* Slightly lighter dark background */
+  color: #f0f0f0; /* Softer light text */
+  font-family: Arial, sans-serif;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,38 +11,50 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+button {
+  background-color: #7a1a73; /* Slightly lighter primary color */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button:hover {
+  background-color: #9b2c94; /* Lighter shade for hover */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+input, textarea, select {
+  background-color: #2a2a2a; /* Lighter input background */
+  color: #f0f0f0;
+  border: 1px solid #7a1a73;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #bbbbbb; /* Softer placeholder text color */
 }
 
 .card {
-  padding: 2em;
+  background-color: #2a2a2a; /* Lighter card background */
+  border: 1px solid #7a1a73;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 .read-the-docs {
-  color: #888;
+  color: #d1b1b1;
 }
+
+.radio-option input {
+  accent-color: #9b2c94; /* Lighter radio button color */
+}
+
+.radio-option label {
+  color: #f0f0f0;
+}
+
