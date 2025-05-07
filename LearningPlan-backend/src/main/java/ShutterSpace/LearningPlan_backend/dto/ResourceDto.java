@@ -14,4 +14,5 @@ public class ResourceDto {
     private Long id;
     private String type;
     private String url;
+    private String name;
 }

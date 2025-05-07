@@ -24,4 +24,13 @@ public class Resource {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    private String name;
+
+    public Object getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+
+    }
 }
