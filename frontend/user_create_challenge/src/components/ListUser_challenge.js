@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ListUser_challenge as fetchUserChallenges } from '../Services/ListUser_challengeServices';
-import './ListUser_challenge.css'; // Dark-themed CSS
+import './ListUser_challenge.css';
 
 const ListUser_challenge = () => {
   const [userChallenges, setUserChallenges] = useState([]);
@@ -11,7 +11,6 @@ const ListUser_challenge = () => {
       .then((response) => {
         setUserChallenges(response.data);
 
-        // Initialize likes state with zeros
         const initialLikes = {};
         response.data.forEach((user) => {
           initialLikes[user.id] = 0;
@@ -30,9 +29,8 @@ const ListUser_challenge = () => {
     }));
   };
 
-  // Determine the highest number of likes and identify 1st, 2nd, and 3rd places
   const sortedLikes = Object.entries(likes)
-    .sort((a, b) => b[1] - a[1]) // Sort by likes in descending order
+    .sort((a, b) => b[1] - a[1])
     .map(entry => entry[0]);
 
   const firstPlace = sortedLikes[0];
@@ -54,13 +52,26 @@ const ListUser_challenge = () => {
               {thirdPlace === user.id.toString() && (
                 <div className="certificate-badge third-place">🥉 3rd Place</div>
               )}
+
+              {/* 👤 User Profile Image */}
+              {user.userImage && (
+                <img
+                  src={`data:image/jpeg;base64,${user.userImage}`}
+                  alt="user profile"
+                  className="user-profile"
+                />
+              )}
+
+              {/* 📸 User's Challenge Photo */}
               {user.photo && (
                 <img
                   src={`data:image/jpeg;base64,${user.photo}`}
                   alt="user upload"
+                  className="challenge-photo"
                 />
               )}
             </div>
+
             <div className="challenge-details">
               <p className="description">{user.description}</p>
               <button onClick={() => handleLike(user.id)} className="like-btn">
