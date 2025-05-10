@@ -107,6 +107,7 @@ const PhotographyComponent = () => {
                 {pageTitle()}
 
                 <div className="inputbox">
+                    <label>Challenge Name</label>
                     <input
                         type="text"
                         placeholder="Challenge Name"
@@ -117,6 +118,7 @@ const PhotographyComponent = () => {
                 </div>
 
                 <div className="inputbox">
+                    <label>Challenge Description</label>
                     <input
                         type="text"
                         placeholder="Challenge Description"
@@ -127,6 +129,7 @@ const PhotographyComponent = () => {
                 </div>
 
                 <div className="inputbox">
+                    <label>Rules & Regulations</label>
                     <input
                         type="text"
                         placeholder="Rules & Regulations"
@@ -137,6 +140,7 @@ const PhotographyComponent = () => {
                 </div>
 
                 <div className="inputbox">
+                    <label>End Date</label>
                     <input
                         type="date"
                         placeholder="End Date"
