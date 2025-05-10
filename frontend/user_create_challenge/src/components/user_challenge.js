@@ -91,7 +91,7 @@ const UserChallenge = () => {
         </div>
       </form>
 
-      <button onClick={() => navigate('/challenge-list')} className="view-challenges-btn">Show Challenges</button>
+      <button onClick={() => navigate('/add-challenge/photography')} className="view-challenges-btn">Show Challenges</button>
     </div>
   );
 };
