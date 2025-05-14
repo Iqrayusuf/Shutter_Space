@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../styles/ModernCss.css"; // Make sure this has your ShutterSpace CSS
 
 export default function ProgressForm({ onAdded }) {
+    const navigate = useNavigate();
     const [templateType, setTemplateType] = useState("");
     const [formData, setFormData] = useState({
         tutorialName: "",
@@ -16,7 +19,8 @@ export default function ProgressForm({ onAdded }) {
         progressMade: "",
         feeling: "",
         tags: "",
-        privacy: "Public"
+        privacy: "Public",
+        priority: "To Do"
     });
 
     const isFormValid = () => {
@@ -35,11 +39,12 @@ export default function ProgressForm({ onAdded }) {
         e.preventDefault();
 
         let finalData = {
-            templateType: templateType,
+            templateType,
             title: "",
             description: "",
             tags: formData.tags,
-            privacy: formData.privacy
+            privacy: formData.privacy,
+            priority: formData.priority
         };
 
         if (templateType === "Completed Tutorial") {
@@ -53,12 +58,11 @@ export default function ProgressForm({ onAdded }) {
             finalData.description = `Progress: ${formData.progressMade} | Feeling: ${formData.feeling}`;
         }
 
-        // Dismiss all existing toasts before showing a new one
         toast.dismiss();
 
         axios.post("http://localhost:8080/api/progress", finalData)
             .then(() => {
-                toast.success("✅ Progress Added Successfully!", { autoClose: 2000, toastId: "success-toast" }); // Use a unique toastId
+                toast.success("✅ Progress Added Successfully!", { autoClose: 2000 });
                 onAdded();
                 setTemplateType("");
                 setFormData({
@@ -72,137 +76,151 @@ export default function ProgressForm({ onAdded }) {
                     progressMade: "",
                     feeling: "",
                     tags: "",
-                    privacy: "Public"
+                    privacy: "Public",
+                    priority: "To Do"
                 });
+                navigate("/progress");
             })
             .catch(err => {
-                toast.error("❌ Failed to add progress. Please try again.", { autoClose: 2000, toastId: "error-toast" }); // Use a unique toastId
-                console.log(err);
+                toast.error("❌ Failed to add progress. Please try again.", { autoClose: 2000 });
+                console.error(err);
             });
     };
 
     return (
-        <>
-            <form id="progress-form" onSubmit={handleSubmit} style={{ border: "1px solid #ddd", padding: "15px", borderRadius: "8px", marginBottom: "15px", backgroundColor: "#f9f9f9", width: "120%", marginLeft: "auto", marginRight: "auto" }}>
-                <h2 style={{ textAlign: "center", marginBottom: "15px", fontSize: "1.5rem" }}>📝 Share Your Learning Progress</h2>
+        <div className="signup-container">
+            <div className="signup-card" style={{ maxWidth: "700px" }}>
+                <h2 className="signup-title">📝 Share Your Learning Progress</h2>
 
-                <div id="template-selection" style={{ marginBottom: "20px" }}>
-                    <h3 style={{ fontWeight: "bold", fontSize: "1.2rem", marginBottom: "5px" }}>Template Selection</h3>
-                    <div className="radio-group">
-                        <label className="radio-option">
-                            <input
-                                type="radio"
-                                value="Completed Tutorial"
-                                checked={templateType === "Completed Tutorial"}
-                                onChange={(e) => setTemplateType(e.target.value)}
-                            />
-                            Completed a Tutorial
-                        </label>
-                        <label className="radio-option">
-                            <input
-                                type="radio"
-                                value="Learned New Skill"
-                                checked={templateType === "Learned New Skill"}
-                                onChange={(e) => setTemplateType(e.target.value)}
-                            />
-                            Learned a New Skill
-                        </label>
-                        <label className="radio-option">
-                            <input
-                                type="radio"
-                                value="General Update"
-                                checked={templateType === "General Update"}
-                                onChange={(e) => setTemplateType(e.target.value)}
-                            />
-                            General Update
-                        </label>
+                <form onSubmit={handleSubmit}>
+                    {/* Template Type Dropdown */}
+                    <div className="form-group form-row">
+                        <label style={{ flex: "1", marginRight: "12px" }}>Template Type</label>
+                        <select
+                            className="skill-level"
+                            style={{ flex: "2" }}
+                            value={templateType}
+                            onChange={(e) => setTemplateType(e.target.value)}
+                            required
+                        >
+                            <option value="">-- Select Template --</option>
+                            <option value="Completed Tutorial">Completed Tutorial</option>
+                            <option value="Learned New Skill">Learned a New Skill</option>
+                            <option value="General Update">General Update</option>
+                        </select>
                     </div>
-                </div>
 
 
+                    {/* Conditional Fields */}
+                    {templateType === "Completed Tutorial" && (
+                        <>
+                            <div className="form-group">
+                                <input type="text" name="tutorialName" placeholder="Tutorial Name" value={formData.tutorialName} onChange={handleChange} required style={{ width: "70%" }} />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" name="keyTakeaway" placeholder="Key Takeaway" value={formData.keyTakeaway} onChange={handleChange} required style={{ width: "70%" }} />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" name="timeSpent" placeholder="Time Spent (e.g., 2 hours)" value={formData.timeSpent} onChange={handleChange} required style={{ width: "70%" }} />
+                            </div>
+                        </>
+                    )}
+
+                    {templateType === "Learned New Skill" && (
+                        <>
+                            <div className="form-group">
+                                <input type="text" name="skillName" placeholder="Skill Name" value={formData.skillName} onChange={handleChange} required style={{ width: "70%" }} />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" name="howILearned" placeholder="How I Learned" value={formData.howILearned} onChange={handleChange} required style={{ width: "70%" }} />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" name="myTip" placeholder="My Tip for Others" value={formData.myTip} onChange={handleChange} required style={{ width: "70%" }} />
+                            </div>
+                        </>
+                    )}
+
+                    {templateType === "General Update" && (
+                        <>
+                            <div className="form-group">
+                                <input type="text" name="generalWork" placeholder="Today I worked on..." value={formData.generalWork} onChange={handleChange} required style={{ width: "70%" }} />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" name="progressMade" placeholder="Progress Made" value={formData.progressMade} onChange={handleChange} required style={{ width: "70%" }} />
+                            </div>
+                            <div className="form-group form-row">
+                                <label style={{ flex: "1", marginRight: "12px" }}>How do you feel?</label>
+                                <select
+                                    name="feeling"
+                                    value={formData.feeling}
+                                    onChange={handleChange}
+                                    className="skill-level"
+                                    style={{ flex: "2" }}
+                                    required
+                                >
+                                    <option value="">-- Select Feeling --</option>
+                                    <option value="😄 Confident">😄 Confident</option>
+                                    <option value="😐 Neutral">😐 Neutral</option>
+                                    <option value="😕 Confused">😕 Confused</option>
+                                </select>
+                            </div>
+
+                        </>
+                    )}
+
+                    {templateType && (
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                name="tags"
+                                placeholder="#tags (comma-separated)"
+                                value={formData.tags}
+                                onChange={handleChange}
+                                style={{ width: "70%" }}
+                            />
+                        </div>
+                    )}
 
 
-                {templateType === "Completed Tutorial" && (
-                    <>
-                        <div style={{ marginBottom: "10px" }}>
-                            <label style={{ fontWeight: "bold" }}>Tutorial Name</label>
-                            <input type="text" name="tutorialName" placeholder="Enter tutorial name" value={formData.tutorialName} onChange={handleChange} required style={{ width: "100%", padding: "6px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }} />
-                        </div>
-                        <div style={{ marginBottom: "10px" }}>
-                            <label style={{ fontWeight: "bold" }}>Key Takeaway</label>
-                            <input type="text" name="keyTakeaway" placeholder="What did you learn?" value={formData.keyTakeaway} onChange={handleChange} required style={{ width: "100%", padding: "6px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }} />
-                        </div>
-                        <div style={{ marginBottom: "10px" }}>
-                            <label style={{ fontWeight: "bold" }}>Time Spent</label>
-                            <input type="text" name="timeSpent" placeholder="e.g., 2 hours" value={formData.timeSpent} onChange={handleChange} required style={{ width: "100%", padding: "6px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }} />
-                        </div>
-                    </>
-                )}
+                    {/* Privacy Dropdown */}
+                    <div className="form-group form-row">
+                        <label style={{ flex: "1", marginRight: "12px" }}>Privacy</label>
+                        <select
+                            name="privacy"
+                            value={formData.privacy}
+                            onChange={handleChange}
+                            className="skill-level"
+                            style={{ flex: "2" }}
+                        >
+                            <option value="Public">Public</option>
+                            <option value="Private">Private</option>
+                            <option value="Mentor Only">Mentor Only</option>
+                        </select>
+                    </div>
 
-                {templateType === "Learned New Skill" && (
-                    <>
-                        <div style={{ marginBottom: "10px" }}>
-                            <label style={{ fontWeight: "bold" }}>Skill Name</label>
-                            <input type="text" name="skillName" placeholder="Enter skill name" value={formData.skillName} onChange={handleChange} required style={{ width: "100%", padding: "6px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }} />
-                        </div>
-                        <div style={{ marginBottom: "10px" }}>
-                            <label style={{ fontWeight: "bold" }}>How I Learned</label>
-                            <input type="text" name="howILearned" placeholder="Describe how you learned" value={formData.howILearned} onChange={handleChange} required style={{ width: "100%", padding: "6px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }} />
-                        </div>
-                        <div style={{ marginBottom: "10px" }}>
-                            <label style={{ fontWeight: "bold" }}>My Tip for Others</label>
-                            <input type="text" name="myTip" placeholder="Share a tip" value={formData.myTip} onChange={handleChange} required style={{ width: "100%", padding: "6px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }} />
-                        </div>
-                    </>
-                )}
+                    {/* Priority Dropdown */}
+                    <div className="form-group form-row">
+                        <label style={{ flex: "1", marginRight: "12px" }}>Priority</label>
+                        <select
+                            name="priority"
+                            value={formData.priority}
+                            onChange={handleChange}
+                            className="skill-level"
+                            style={{ flex: "2" }}
+                        >
+                            <option value="To Do">To Do</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
 
-                {templateType === "General Update" && (
-                    <>
-                        <div style={{ marginBottom: "10px" }}>
-                            <label style={{ fontWeight: "bold" }}>Today I worked on</label>
-                            <input type="text" name="generalWork" placeholder="Describe your work" value={formData.generalWork} onChange={handleChange} required style={{ width: "100%", padding: "6px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }} />
-                        </div>
-                        <div style={{ marginBottom: "10px" }}>
-                            <label style={{ fontWeight: "bold" }}>Progress Made</label>
-                            <input type="text" name="progressMade" placeholder="What progress did you make?" value={formData.progressMade} onChange={handleChange} required style={{ width: "100%", padding: "6px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }} />
-                        </div>
-                        <div style={{ marginBottom: "10px" }}>
-                            <p style={{ fontWeight: "bold", marginBottom: "5px" }}>Feeling</p>
-                            <label style={{ marginRight: "10px" }}>
-                                <input type="radio" name="feeling" value="😄 Confident" checked={formData.feeling === "😄 Confident"} onChange={handleChange} /> 😄 Confident
-                            </label>
-                            <label style={{ marginRight: "10px" }}>
-                                <input type="radio" name="feeling" value="😐 Neutral" checked={formData.feeling === "😐 Neutral"} onChange={handleChange} /> 😐 Neutral
-                            </label>
-                            <label>
-                                <input type="radio" name="feeling" value="😕 Confused" checked={formData.feeling === "😕 Confused"} onChange={handleChange} /> 😕 Confused
-                            </label>
-                        </div>
-                    </>
-                )}
-
-                <div style={{ marginBottom: "10px" }}>
-                    <label style={{ fontWeight: "bold" }}>Tags</label>
-                    <input type="text" name="tags" placeholder="#tags (comma-separated)" value={formData.tags} onChange={handleChange} style={{ width: "100%", padding: "6px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }} />
-                </div>
-
-                <div style={{ marginBottom: "10px" }}>
-                    <p style={{ fontWeight: "bold", marginBottom: "5px" }}>Privacy</p>
-                    <label style={{ marginRight: "10px" }}>
-                        <input type="radio" name="privacy" value="Public" checked={formData.privacy === "Public"} onChange={handleChange} /> Public
-                    </label>
-                    <label style={{ marginRight: "10px" }}>
-                        <input type="radio" name="privacy" value="Private" checked={formData.privacy === "Private"} onChange={handleChange} /> Private
-                    </label>
-                    <label>
-                        <input type="radio" name="privacy" value="Mentor Only" checked={formData.privacy === "Mentor Only"} onChange={handleChange} /> Share with Mentor Only
-                    </label>
-                </div>
-
-                <button type="submit" disabled={!isFormValid()} style={{ marginTop: "10px", padding: "8px 15px", backgroundColor: "#4CAF50", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>Post Update</button>
-            </form>
-            <ToastContainer position="top-center" autoClose={2000} />
-        </>
+                    {/* Submit Button */}
+                    <button type="submit" className="signup-button" disabled={!isFormValid()}>
+                        ➕ Post Update
+                    </button>
+                </form>
+                <ToastContainer position="top-center" autoClose={2000} />
+            </div>
+        </div>
     );
 }
-

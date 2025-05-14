@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import axios from "axios";
 import ProgressCard from "../components/ProgressCard";
+import ProgressCharts from "../components/ProgressCharts";
+
 
 export default function ProgressPage() {
     const [progressList, setProgressList] = useState([]);
