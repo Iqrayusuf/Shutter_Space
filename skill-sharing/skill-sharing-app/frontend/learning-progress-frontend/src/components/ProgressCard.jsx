@@ -9,7 +9,8 @@ export default function ProgressCard({ progress, onDelete, onTagClick }) {
         title: progress.title,
         description: progress.description,
         tags: progress.tags,
-        privacy: progress.privacy
+        privacy: progress.privacy,
+        priority: progress.priority
     });
 
     const handleEditChange = (e) => {
@@ -44,16 +45,16 @@ export default function ProgressCard({ progress, onDelete, onTagClick }) {
         if (!progress.tags) return null;
         return progress.tags.split(" ").map(tag => (
             <span key={tag}
-                  onClick={() => onTagClick(tag.replace("#", ""))}
-                  style={{
-                      background: "#007BFF",
-                      color: "white",
-                      padding: "2px 6px",
-                      borderRadius: "5px",
-                      marginRight: "5px",
-                      cursor: "pointer",
-                      fontSize: "12px"
-                  }}>
+                onClick={() => onTagClick(tag.replace("#", ""))}
+                style={{
+                    background: "#007BFF",
+                    color: "white",
+                    padding: "2px 6px",
+                    borderRadius: "5px",
+                    marginRight: "5px",
+                    cursor: "pointer",
+                    fontSize: "12px"
+                }}>
                 {tag}
             </span>
         ));
@@ -119,6 +120,20 @@ export default function ProgressCard({ progress, onDelete, onTagClick }) {
                             <option value="Mentor Only">Mentor Only</option>
                         </select>
                     </div>
+                    <div style={{ marginBottom: "10px" }}>
+                        <label>Priority</label>
+                        <select
+                            name="priority"
+                            value={editData.priority}
+                            onChange={handleEditChange}
+                            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+                        >
+                            <option value="To Do">To Do</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+
                     <button onClick={handleEditSubmit} style={{ marginRight: "10px", padding: "8px 15px", backgroundColor: "#4CAF50", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>Save</button>
                     <button onClick={() => setIsEditing(false)} style={{ padding: "8px 15px", backgroundColor: "#f44336", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>Cancel</button>
                 </div>
@@ -128,6 +143,8 @@ export default function ProgressCard({ progress, onDelete, onTagClick }) {
                     <p>{progress.description}</p>
                     <p><strong>Tags: </strong>{renderTags()}</p>
                     <p><strong>Privacy: </strong>{progress.privacy}</p>
+                    <p><strong>Priority: </strong>{progress.priority || "Not Set"}</p>
+
 
                     {/* Screenshot Preview */}
                     {progress.screenshot && (
