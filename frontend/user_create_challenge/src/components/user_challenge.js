@@ -36,7 +36,7 @@ const UserChallenge = () => {
     try {
       const response = await fetch('http://localhost:8080/api/userPhotography', {
         method: 'POST',
-        body: formData
+        body: formData,
       });
 
       if (response.ok) {
@@ -90,8 +90,6 @@ const UserChallenge = () => {
           <button type="submit" className="submit-btn">Submit Challenge</button>
         </div>
       </form>
-
-      <button onClick={() => navigate('/add-challenge/photography')} className="view-challenges-btn">Show Challenges</button>
     </div>
   );
 };
