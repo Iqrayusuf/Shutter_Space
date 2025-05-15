@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { listPosts } from '../Services/PostService';
+import { deletePost, listPosts } from '../Services/PostService';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import './PostComponent.css';
@@ -9,10 +9,13 @@ dayjs.extend(relativeTime);
 
 const PostComponent = () => {
   const [posts, setPosts] = useState([]);
-
   const navigator = useNavigate();
 
   useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  function fetchPosts() {
     listPosts()
       .then((response) => {
         setPosts(response.data);
@@ -20,22 +23,38 @@ const PostComponent = () => {
       .catch((error) => {
         console.error('Error fetching posts:', error);
       });
-  }, []);
+  }
 
   function addNewPost() {
-    navigator('/add-posts/new');
+    navigator('/add-post');
+  }
+
+  function handleUpdatePost(postId) {
+    navigator(`/update-post/${postId}`);
+  }
+
+  function handleDeletePost(postId) {
+    console.log('Deleting post with ID:', postId);
+    deletePost(postId)
+      .then(() => {
+        fetchPosts(); // Refresh after delete
+      })
+      .catch((error) => {
+        console.error('Error deleting post:', error);
+      });
   }
 
   return (
     <div className="feed-container">
-      <button className='btn btn-primary' onClick={addNewPost}>Create Post</button>
+      <button className='btn btn-primary mb-3' onClick={addNewPost}>Create Post</button>
+
       {posts.map((post) => (
         <div key={post.postId} className="post-card">
           <div className="post-header">
-          <img
-             src={`https://api.dicebear.com/7.x/identicon/svg?seed=User${post.userId}`}
-             alt="Avatar"
-             className="avatar"
+            <img
+              src={`https://api.dicebear.com/7.x/identicon/svg?seed=User${post.userId}`}
+              alt="Avatar"
+              className="avatar"
             />
 
             <div>
@@ -61,19 +80,19 @@ const PostComponent = () => {
               )}
             </div>
 
-            <div className="tags">
+            <div className="tags mt-2">
               {post.tags.map((tag, i) => (
                 <span key={i} className="tag">#{tag}</span>
               ))}
             </div>
           </div>
 
-          <div className="post-actions">
-            <button>👍 Like</button>
-            <button>💬 Comment</button>
-            <button>↗️ Share</button>
-            <button className="btn btn-sm btn-warning" onClick={() => handleEdit(post.postId)}>✏️ Edit</button>
-            <button className="btn btn-sm btn-danger" onClick={() => handleDelete(post.postId)}>🗑️ Delete</button>
+          <div className="post-actions mt-3">
+            <button className="btn btn-outline-secondary me-2">👍 Like</button>
+            <button className="btn btn-outline-secondary me-2">💬 Comment</button>
+            <button className="btn btn-outline-secondary me-2">↗️ Share</button>
+            <button className="btn btn-warning me-2" onClick={() => handleUpdatePost(post.postId)}>✏️ Edit</button>
+            <button className="btn btn-danger" onClick={() => handleDeletePost(post.postId)}>🗑️ Delete</button>
           </div>
         </div>
       ))}
