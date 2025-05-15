@@ -1,0 +1,696 @@
+/* SignupComponent.css */
+/* Matching ShutterSpace dashboard theme */
+
+/*
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+}
+
+.signup-card {
+    width: 100%;
+    max-width: 480px;
+    padding: 30px;
+    background-color: rgba(34, 34, 34, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.signup-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-align: center;
+    background: linear-gradient(90deg, #3a7bd5, #5e35b1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    width: 100%;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #3a7bd5;
+    box-shadow: 0 0 0 2px rgba(58, 123, 213, 0.2);
+    outline: none;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.form-group input.error {
+    border-color: #f44336;
+}
+
+.error-message {
+    color: #f44336;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+.skills-section {
+    margin-bottom: 20px;
+}
+
+.skills-section label {
+    display: block;
+    margin-bottom: 8px;
+    color: #e0e0e0;
+    font-size: 15px;
+}
+
+.skill-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.skill-input {
+    flex: 1;
+    padding: 12px 15px;
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 15px;
+}
+
+.skill-level {
+    width: 140px;
+    padding: 12px 15px;
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 15px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.add-skill-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    background-color: #222;
+    color: #3a7bd5;
+    border: 1px dashed #3a7bd5;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-skill-button:hover {
+    background-color: rgba(58, 123, 213, 0.1);
+}
+
+
+.upload-section {
+    margin-bottom: 20px;
+}
+
+.upload-section label {
+    display: block;
+    margin-bottom: 8px;
+    color: #e0e0e0;
+    font-size: 15px;
+}
+
+.upload-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-button {
+    padding: 10px 15px;
+    background-color: #3a7bd5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.upload-button:hover {
+    background-color: #2e6ac0;
+}
+
+.file-name {
+    color: #999;
+    font-size: 14px;
+}
+
+.image-preview {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3a7bd5;
+}
+
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    accent-color: #3a7bd5;
+}
+
+.remember-me label {
+    color: #e0e0e0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+.signup-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    background-color: #3a7bd5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+}
+
+.signup-button:hover {
+    background-color: #2e6ac0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.signup-button.loading {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.social-button.facebook {
+    background-color: #4267B2;
+}
+
+.social-button.facebook:hover {
+    background-color: #365899;
+}
+
+.social-button.google {
+    background-color: #DB4437;
+}
+
+.social-button.google:hover {
+    background-color: #C53929;
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #222;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3a7bd5;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5e35b1;
+}
+
+
+@media (max-width: 576px) {
+    .signup-card {
+        padding: 20px;
+    }
+
+    .signup-title {
+        font-size: 24px;
+    }
+
+    .form-group input,
+    .skill-input,
+    .skill-level {
+        padding: 10px 12px 10px 36px;
+        font-size: 14px;
+    }
+
+    .input-icon {
+        left: 10px;
+    }
+
+    .skill-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .skill-level {
+        width: 100%;
+    }
+}
+*/
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Global reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Container */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+}
+
+/* Card */
+.signup-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 30px;
+    background-color: rgba(34, 34, 34, 0.95);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Title */
+.signup-title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+    background: linear-gradient(90deg, #3a7bd5, #5e35b1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Input group */
+.form-group {
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 18px 14px 42px;
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-group input:focus {
+    border-color: #3a7bd5;
+    box-shadow: 0 0 0 2px rgba(58, 123, 213, 0.2);
+    outline: none;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 16px;
+}
+
+/* Skills */
+.skills-section {
+    margin-bottom: 25px;
+}
+
+.skills-section label {
+    display: block;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.skill-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.skill-input {
+    flex: 1;
+    padding: 12px 15px;
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 15px;
+}
+
+.skill-level {
+    width: 140px;
+    padding: 12px 15px;
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 15px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.add-skill-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    background-color: #222;
+    color: #3a7bd5;
+    border: 1px dashed #3a7bd5;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.add-skill-button:hover {
+    background-color: rgba(58, 123, 213, 0.1);
+}
+
+/* Upload */
+.upload-section {
+    margin-bottom: 20px;
+}
+
+.upload-section label {
+    display: block;
+    margin-bottom: 8px;
+    color: #e0e0e0;
+    font-size: 15px;
+}
+
+.upload-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-button {
+    padding: 10px 15px;
+    background-color: #3a7bd5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.upload-button:hover {
+    background-color: #2e6ac0;
+}
+
+.file-name {
+    color: #999;
+    font-size: 14px;
+}
+
+.image-preview {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3a7bd5;
+}
+
+/* Remember me */
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    accent-color: #3a7bd5;
+}
+
+.remember-me label {
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+/* Sign up button */
+.signup-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px;
+    background-color: #3a7bd5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+}
+
+.signup-button:hover {
+    background-color: #2e6ac0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Social login */
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.social-button.facebook {
+    background-color: #4267B2;
+}
+
+.social-button.facebook:hover {
+    background-color: #365899;
+}
+
+.social-button.google {
+    background-color: #DB4437;
+}
+
+.social-button.google:hover {
+    background-color: #C53929;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #222;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3a7bd5;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5e35b1;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .signup-card {
+        padding: 25px;
+    }
+
+    .signup-title {
+        font-size: 24px;
+    }
+
+    .form-group input,
+    .skill-input,
+    .skill-level {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .input-icon {
+        left: 10px;
+    }
+
+    .skill-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .skill-level {
+        width: 100%;
+    }
+}
+
+.signup-container {
+  background: linear-gradient(-45deg, #000000, #1a1a1a, #111111, #000000);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
