@@ -1,19 +1,15 @@
 
 import './App.css'
 import PostComponent from './component/PostComponent'
-import HelloWorld from './HelloWorld'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HeaderComponent from './component/HeaderComponent'
-import FooterComponent from './component/FooterComponent'
-import CreatePostComponent from './component/CreatePostComponent';
-
+import CreatePost from './component/CreatePostComponent';
+import EditPostComponent from './component/EditPostComponent';
 function App() {
   
 
   return (
     <>
     <BrowserRouter>
-    <HeaderComponent />
     <Routes>
       // http://localhost:5173
       <Route path="/" element = {<PostComponent />}></Route>
@@ -22,10 +18,10 @@ function App() {
       <Route path="/posts" element = {<PostComponent />}></Route>
 
       // http://localhost:5173/add-post
-      <Route path="/add-post" element = {<CreatePostComponent />}></Route>
+      <Route path="/add-post" element = {<CreatePost />}></Route>
 
       // http://localhost:5173/update-post
-      <Route path="/update-post/:postId" element = {<CreatePostComponent />}></Route>
+      <Route path="/edit-post/:id" element = {<EditPostComponent />}></Route>
     </Routes>
     
     </BrowserRouter>
