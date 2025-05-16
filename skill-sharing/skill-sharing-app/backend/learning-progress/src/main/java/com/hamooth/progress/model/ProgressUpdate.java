@@ -2,9 +2,10 @@ package com.hamooth.progress.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -20,7 +21,13 @@ public class ProgressUpdate {
     private String title;
     private String description;
     private String tags;
-    private String privacy; // Public / Private / Mentor Only
+    private String privacy;
     private LocalDateTime createdAt;
-    private String screenshot;
+    private String priority; // Add this line
+
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }
