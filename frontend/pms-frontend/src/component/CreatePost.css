@@ -1,0 +1,166 @@
+/* Pure CSS Black Form Styling - No JavaScript */
+
+/* Target the root elements */
+:root {
+  --form-bg: #000000;
+  --form-text: #ffffff;
+  --form-border: #ffffff;
+}
+
+/* Target the body and all wrappers */
+html, body, #root, .app, .container, .row, .col, .card, .card-body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Target all form elements with extreme specificity */
+.card .card-body input[type="text"],
+.card .card-body input[type="email"],
+.card .card-body input[type="password"],
+.card .card-body input[type="file"],
+.card .card-body input[type="number"],
+.card .card-body textarea,
+.card .card-body select,
+.container input,
+.container textarea,
+.container select,
+form input,
+form textarea,
+form select,
+.form-control,
+.form-group input,
+.form-group textarea,
+.form-group select,
+[id="title"],
+[id="description"],
+[id="tags"],
+[id="media"] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+/* Override Bootstrap form control focus state */
+.form-control:focus {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Target form control placeholders */
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Target all buttons */
+.btn, button, input[type="button"], input[type="submit"] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Target all dropdowns */
+select, .dropdown-menu, .dropdown-item {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Target file input button */
+input[type="file"]::-webkit-file-upload-button {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+/* Target labels and text */
+label, p, h1, h2, h3, h4, h5, h6, span, div {
+  color: #ffffff !important;
+}
+
+/* Target with attribute selectors for extreme specificity */
+[class*="form"] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+[class*="input"], [class*="textarea"], [class*="select"] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Add !important to background shorthand to override any background images */
+* {
+  background: #000000 !important;
+  background-image: none !important;
+}
+
+/* Target the container and its descendants */
+.container * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Add style for dropdown arrow */
+select {
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1rem center !important;
+  padding-right: 2.5rem !important;
+}
+
+/* These styles apply to every single element on the page */
+body * {
+  background-color: #000000 !important;
+}
+
+/* Override any inline styles with a more aggressive approach */
+[style*="background"] {
+  background: #000000 !important;
+}
+
+[style*="color"] {
+  color: #ffffff !important;
+}
+
+/* Target specific form elements by their exact class names */
+.form-control {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+/* Apply to all form elements within an element with an ID */
+form input, form textarea, form select,
+#root input, #root textarea, #root select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+/* Use of nth-child to target form elements regardless of their class */
+form > div > *:nth-child(2) {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Target validation states */
+.is-invalid, .is-valid {
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+
+/* Add a black overlay to the entire page to force black background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  z-index: -1;
+}

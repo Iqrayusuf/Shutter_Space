@@ -1,41 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { createPost, getPostById, updatePost } from "../Services/PostService";
-import { useNavigate, useParams } from "react-router-dom";
-import './FormComponent.css';
+import React, { useState } from "react";
+import { createPost } from "../Services/PostService";
+import { useNavigate } from "react-router-dom";
+import './CreatePost.css';
 
 const CreatePostComponent = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [mediaFiles, setMediaFiles] = useState([]);
-  const [existingMediaUrls, setExistingMediaUrls] = useState([]);
-  const [tags, setTags] = useState([]);
-  const [tagInput, setTagInput] = useState('');
-  const [isVideo, setIsVideo] = useState(false);
+  const [tags, setTags] = useState('');
   const [isPublic, setIsPublic] = useState(true);
-  const [userId] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [userId] = useState(1); // This should come from authentication in a real app
 
-  const { postId } = useParams();
-  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    if (postId) {
-      getPostById(postId)
-        .then((response) => {
-          const data = response.data;
-          setTitle(data.title);
-          setDescription(data.description);
-          setExistingMediaUrls(data.mediaUrls || []);
-          setTags(data.tags || []);
-          setTagInput(data.tags?.join(', ') || '');
-          setIsVideo(data.isVideo || false);
-          setIsPublic(data.isPublic ?? true);
-        })
-        .catch((error) => {
-          console.error("Error fetching post:", error);
-        });
-    }
-  }, [postId]);
+  const navigate = useNavigate();
 
   const validateForm = () => {
     const validationErrors = {};
@@ -51,10 +29,10 @@ const CreatePostComponent = () => {
       valid = false;
     }
 
-    if (!postId && mediaFiles.length === 0) {
+    if (mediaFiles.length === 0) {
       validationErrors.mediaFiles = "Please upload at least one media file";
       valid = false;
-    } else if (!postId) {
+    } else {
       const isVideoFile = mediaFiles[0]?.type.startsWith("video/");
       if (isVideoFile && mediaFiles.length > 1) {
         validationErrors.mediaFiles = "Only one video file is allowed";
@@ -64,112 +42,110 @@ const CreatePostComponent = () => {
         validationErrors.mediaFiles = "You can upload up to 3 images";
         valid = false;
       }
-      setIsVideo(isVideoFile);
     }
 
     setErrors(validationErrors);
     return valid;
   };
 
-  const saveOrUpdatePost = (e) => {
+  const savePost = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) return;
+    
+    setIsSubmitting(true);
 
-    const post = {
-      title,
-      description,
-      mediaFiles,
-      isVideo,
-      tags,
-      isPublic,
-      userId,
-    };
+    try {
+      // Prepare post data
+      const postData = {
+        title,
+        description,
+        tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
+        isPublic,
+        userId
+        // Note: mediaUrls will be set by the backend
+        // isVideo will be determined by the backend based on the files
+      };
 
-    if (postId) {
-      updatePost(postId, post)
-        .then((response) => {
-          console.log("Post updated:", response.data);
-          navigate("/posts");
-        })
-        .catch((error) => {
-          console.error("Error updating post:", error);
-        });
-    } else {
-      createPost(post)
-        .then((response) => {
-          console.log("Post created:", response.data);
-          navigate("/posts");
-        })
-        .catch((error) => {
-          console.error("Error creating post:", error);
-        });
+      console.log("Submitting Post:", postData);
+      
+      // Send data to the backend
+      const response = await createPost(postData, mediaFiles);
+      
+      console.log("Post created:", response.data);
+      navigate('/posts');
+    } catch (error) {
+      console.error("Error creating post:", error);
+      setErrors({
+        ...errors,
+        submit: "Failed to create post. Please try again."
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
-
-  const pageTitle = () =>
-    <h2 className="text-center mt-3">{postId ? "Update Post" : "Create Post"}</h2>;
 
   return (
     <div className="container mt-4">
       <div className="row">
         <div className="card">
-          {pageTitle()}
+          <h2 className="text-center mt-3">Create Post</h2>
           <div className="card-body">
-            <form onSubmit={saveOrUpdatePost}>
+            {errors.submit && (
+              <div className="alert alert-danger" role="alert">
+                {errors.submit}
+              </div>
+            )}
+            
+            <form onSubmit={savePost}>
               <div className="form-group mb-3">
                 <label htmlFor="title">Title</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={`form-control ${errors.title ? 'is-invalid' : ''}`}
                   id="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
-                {errors.title && <small className="text-danger">{errors.title}</small>}
+                {errors.title && <div className="invalid-feedback">{errors.title}</div>}
               </div>
 
               <div className="form-group mb-3">
                 <label htmlFor="description">Description</label>
                 <textarea
-                  className="form-control"
+                  className={`form-control ${errors.description ? 'is-invalid' : ''}`}
                   id="description"
                   rows="3"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
-                {errors.description && <small className="text-danger">{errors.description}</small>}
+                {errors.description && <div className="invalid-feedback">{errors.description}</div>}
               </div>
 
-              {!postId && (
-                <div className="form-group mb-3">
-                  <label htmlFor="media">Upload Media (1 video or up to 3 images)</label>
-                  <input
-                    type="file"
-                    className="form-control"
-                    id="media"
-                    multiple
-                    accept="image/*,video/*"
-                    onChange={(e) => setMediaFiles(Array.from(e.target.files))}
-                  />
-                  {errors.mediaFiles && <small className="text-danger">{errors.mediaFiles}</small>}
-                </div>
-              )}
-
-              {postId && existingMediaUrls.length > 0 && (
-                <div className="form-group mb-3">
-                  <label>Existing Media:</label>
-                  <div className="media-preview d-flex gap-2">
-                    {existingMediaUrls.map((url, i) =>
-                      isVideo ? (
-                        <video key={i} src={url} width="200" controls />
-                      ) : (
-                        <img key={i} src={url} alt="media" width="100" />
-                      )
-                    )}
+              <div className="form-group mb-3">
+                <label htmlFor="media">Upload Media (1 video or up to 3 images)</label>
+                <input
+                  type="file"
+                  className={`form-control ${errors.mediaFiles ? 'is-invalid' : ''}`}
+                  id="media"
+                  multiple
+                  accept="image/*,video/*"
+                  onChange={(e) => setMediaFiles(Array.from(e.target.files))}
+                />
+                {errors.mediaFiles && <div className="invalid-feedback">{errors.mediaFiles}</div>}
+                {mediaFiles.length > 0 && (
+                  <div className="mt-2">
+                    <p>Selected files:</p>
+                    <ul className="list-group">
+                      {Array.from(mediaFiles).map((file, index) => (
+                        <li key={index} className="list-group-item">
+                          {file.name} ({(file.size / 1024).toFixed(2)} KB)
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
 
               <div className="form-group mb-3">
                 <label htmlFor="tags">Tags (comma-separated)</label>
@@ -177,11 +153,9 @@ const CreatePostComponent = () => {
                   type="text"
                   className="form-control"
                   id="tags"
-                  value={tagInput}
-                  onChange={(e) => {
-                    setTagInput(e.target.value);
-                    setTags(e.target.value.split(',').map(tag => tag.trim()));
-                  }}
+                  value={tags}
+                  onChange={(e) => setTags(e.target.value)}
+                  placeholder="travel, nature, photography"
                 />
               </div>
 
@@ -189,7 +163,7 @@ const CreatePostComponent = () => {
                 <label>Visibility</label>
                 <select
                   className="form-control"
-                  value={isPublic}
+                  value={isPublic.toString()}
                   onChange={(e) => setIsPublic(e.target.value === "true")}
                 >
                   <option value="true">Public</option>
@@ -197,8 +171,12 @@ const CreatePostComponent = () => {
                 </select>
               </div>
 
-              <button type="submit" className="btn btn-primary">
-                {postId ? "Update Post" : "Create Post"}
+              <button 
+                type="submit" 
+                className="btn btn-primary"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Creating Post...' : 'Create Post'}
               </button>
             </form>
           </div>
@@ -206,6 +184,7 @@ const CreatePostComponent = () => {
       </div>
     </div>
   );
+  
 };
 
 export default CreatePostComponent;
