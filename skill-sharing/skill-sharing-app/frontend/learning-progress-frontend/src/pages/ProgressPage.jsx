@@ -32,6 +32,23 @@ export default function ProgressPage() {
             >
                 ⬅️ Back to Form
             </button>
+            {/* View Timeline Button */}
+            <button
+                onClick={() => navigate("/timeline")}
+                style={{
+                    marginBottom: "20px",
+                    marginLeft: "10px",
+                    padding: "8px 15px",
+                    backgroundColor: "#009688",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease"
+                }}
+            >
+                🕒 View Timeline
+            </button>
             <h1 style={{ color: "#fff", background: "linear-gradient(90deg, #3a7bd5, #5e35b1)", WebkitBackgroundClip: "text", color: "transparent" }}>📋 All Progress Updates</h1>
             {progressList.map(p => (
                 <ProgressCard key={p.id} progress={p} onDelete={() => {
